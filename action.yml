@@ -151,8 +151,8 @@ runs:
       env:
         PACMAN_VERSION: 6.0.1
       run: |
-        # sudo git clone --depth 1 https://gitlab.manjaro.org/packages/core/pacman.git
-        # pushd pacman
+        sudo git clone --depth 1 https://gitlab.manjaro.org/packages/core/pacman.git
+        pushd pacman
           sudo wget https://sources.archlinux.org/other/pacman/pacman-${PACMAN_VERSION}.tar.xz
           sudo tar -xvf pacman-${PACMAN_VERSION}.tar.xz
           pushd pacman-${PACMAN_VERSION}
@@ -166,7 +166,7 @@ runs:
                       build
             sudo meson compile -C build
             sudo meson install -C build
-          # popd
+          popd
           sudo install -m644 pacman.conf /etc/pacman.conf
           sudo install -m644 makepkg.conf /etc/
           sudo mkdir -p /etc/pacman.d
