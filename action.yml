@@ -213,12 +213,16 @@ runs:
         #   sudo pacman-key --keyserver keys.openpgp.org --recv-key $gpg_key
         # done
         
-        sudo pacman -Sy
-        sudo pacman-key --recv-key 0706B90D37D9B881 FBA220DFC880C036 --keyserver keyserver.ubuntu.com
-        sudo pacman-key --lsign-key 0706B90D37D9B881 FBA220DFC880C036
-        sudo pacman --noconfirm -U 'https://geo-mirror.chaotic.cx/chaotic-aur/chaotic-'{keyring,mirrorlist}'.pkg.tar.zst'
-        echo -e "[garuda]\\nInclude = /etc/pacman.d/chaotic-mirrorlist\\n[chaotic-aur]\\nInclude = /etc/pacman.d/chaotic-mirrorlist" | sudo tee -a /etc/pacman.conf 
-        echo "" | sudo tee -a /etc/pacman.conf 
+        # sudo pacman -Sy
+        # sudo pacman-key --recv-key 0706B90D37D9B881 FBA220DFC880C036 --keyserver keyserver.ubuntu.com
+        # sudo pacman-key --lsign-key 0706B90D37D9B881 FBA220DFC880C036
+        # sudo pacman --noconfirm -U 'https://geo-mirror.chaotic.cx/chaotic-aur/chaotic-'{keyring,mirrorlist}'.pkg.tar.zst'
+        # echo -e "[garuda]\\nInclude = /etc/pacman.d/chaotic-mirrorlist\\n[chaotic-aur]\\nInclude = /etc/pacman.d/chaotic-mirrorlist" | sudo tee -a /etc/pacman.conf 
+        # echo "" | sudo tee -a /etc/pacman.conf 
+        
+    # ## Tmate ##
+    - name: Setup TMATE Session
+      uses: mxschmitt/action-tmate@v3
         
     # - id: pull-keys
     #   shell: bash
@@ -292,9 +296,9 @@ runs:
         BRANCH: ${{ inputs.iso-profiles-branch }}
       run: sudo git clone ${BRANCH:+--branch ${BRANCH}} --depth 1 ${REPO} iso-profiles
             
-    ## Tmate ##
-    - name: Setup TMATE Session
-      uses: mxschmitt/action-tmate@v3
+    # ## Tmate ##
+    # - name: Setup TMATE Session
+    #   uses: mxschmitt/action-tmate@v3
     
 #     - id: image-build
 #       shell: bash
