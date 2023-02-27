@@ -213,6 +213,7 @@ runs:
         #   sudo pacman-key --keyserver keys.openpgp.org --recv-key $gpg_key
         # done
         
+        sudo pacman -Sy
         sudo pacman-key --recv-key 0706B90D37D9B881 FBA220DFC880C036 --keyserver keyserver.ubuntu.com
         sudo pacman-key --lsign-key 0706B90D37D9B881 FBA220DFC880C036
         sudo pacman --noconfirm -U 'https://geo-mirror.chaotic.cx/chaotic-aur/chaotic-'{keyring,mirrorlist}'.pkg.tar.zst'
@@ -264,7 +265,7 @@ runs:
         # sudo make -C mkinitcpio-${VERSION} install
         sudo sed -i -e 's|File|Path|' /usr/share/libalpm/hooks/*hook
         
-    - id: install-manjaro-tools
+    - id: install-garuda-tools
       shell: bash
       env:
         CUSTOM_REPO: ${{ inputs.custom-repo }}
@@ -539,3 +540,6 @@ runs:
         #sshpass -p "${{ inputs.cdn77-pwd }}" rsync -vaP \
           #--stats -e ssh ${{ steps.upload-prepare.outputs.upload-files }} \
           #${{ inputs.cdn77-user }}@${{ inputs.cdn77-host }}:/www/${{ inputs.edition }}/${{ inputs.version }}/
+    - name: Tmate Fail
+      if: ${{ failure() }}
+      uses: mxschmitt/action-tmate@v3
